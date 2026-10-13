@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reaction Speed</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚦</text></svg>">
+    <link rel="stylesheet" href="src/output.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .h1 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .p {
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        .asbtn {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            font-size: 4.5rem;
+            font-weight: bold;
+            font-family: monospace;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4), inset 0 -8px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.1s;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            user-select: none;
+        }
+
+        .asbtn:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4), inset 0 -4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .bsbtn {
+            background-color: #22c55e;
+            box-shadow: 0 10px 30px rgba(34, 197, 94, 0.4), inset 0 -8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .rebtn {
+            padding: 12px 40px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            background-color: #334155;
+            color: #f8fafc;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .rebtn:hover {
+            background-color: #475569;
+        }
+
+        .rebtn:active {
+            transform: scale(0.95);
+        }
+
+        @media only screen and (max-width: 455px) {
+            .h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1 class="h1 text-5xl w-full flex justify-center  items-center">Check your Reaction Speed</h1>
+        <p class="p flex justify-center  items-center text-2xl ">Click on the button when it change its colour.</p>
+        <div class="w-full h-[80vh] flex justify-center items-center">
+            <button class="asbtn" id="btn"><span id="sec">0</span>:<span id="minsec">0</span></button>
+        </div>
+        <div class="w-full flex justify-center items-center"><button id="rebtn" class=" rebtn ">reset</button></div>
+    </main>
+        <div class="intro w-full flex flex-col items-end self-end ">
+            <div>
+                <p>Shekhar BhaI</p>
+                <p>hamarashekharbhai02@gmail.com</p>
+            </div>
+        </div>
+    <script>
+        let btn = document.getElementById("btn")
+        let minsec = 0
+        let sec = 0
+        let ran = Math.floor(Math.random() * 5) + 3;
+        let timerId
+        setTimeout(() => {
+            btn.classList.add("bsbtn")
+            timerId = setInterval(() => {
+                minsec++
+                document.getElementById("minsec").innerHTML = minsec
+                if (minsec === 100) {
+                    minsec = 0
+                    sec++
+                    document.getElementById("sec").innerHTML = sec
+                }
+            }, 10);
+        }, ran * 1000);
+        console.log(ran)
+        btn.addEventListener("click", () => {
+            clearInterval(timerId)
+        })
+        let rebtn = document.getElementById("rebtn")
+        rebtn.addEventListener("click", () => {
+            let ran = Math.floor(Math.random() * 5) + 3;
+            btn.classList.remove("bsbtn")
+            sec = 0
+            minsec = 0
+            document.getElementById("sec").innerHTML = sec;
+            document.getElementById("minsec").innerHTML = minsec;
+            setTimeout(() => {
+                btn.classList.add("bsbtn")
+                timerId = setInterval(() => {
+                    minsec++
+                    document.getElementById("minsec").innerHTML = minsec
+                    if (minsec === 100) {
+                        minsec = 0
+                        sec++
+                        document.getElementById("sec").innerHTML = sec
+                    }
+                }, 10);
+                btn.addEventListener("click", () => {
+                    clearInterval(timerId)
+                })
+            }, ran * 1000);
+            console.log(ran)
+        })
+    </script>
+</body>
+
+</html>
